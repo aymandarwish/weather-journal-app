@@ -1,6 +1,6 @@
 // Personal API Key for OpenWeatherMap API
 let baseURL = 'http://api.openweathermap.org/data/2.5/weather?q='
-let apiKey = '0fec4ccc9410e0d124aa99dffb0bb979';
+const apiKey = '0fec4ccc9410e0d124aa99dffb0bb979';
 
 document.getElementById('generate').addEventListener('click', performAction);
 
@@ -17,8 +17,10 @@ function performAction(e){
       let d = new Date();
       let myMonth = d.getMonth() + 1
       let newDate = myMonth+'.'+ d.getDate()+'.'+ d.getFullYear();
+      const Celsius = (data.main.temp - 273.15);
+      const temp = Math.round(Celsius);
       // Add data to POST request
-      postData('/addWeather', {date: newDate, temp: data.main.temp, content:feelings} );
+      postData('/addWeather', {date: newDate, temp: temp, content:feelings} );
   })
   .then(
     function(){updateUI()} //invistigate about calling method inside function to apply async correctly
